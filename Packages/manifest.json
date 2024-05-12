@@ -1,6 +1,7 @@
 {
   "dependencies": {
-    "com.ultraleap.tracking": "6.14.0",
+    "com.normalvr.normcore": "2.9.5",
+    "com.ultraleap.tracking": "6.15.0",
     "com.unity.collab-proxy": "2.2.0",
     "com.unity.feature.development": "1.0.1",
     "com.unity.textmeshpro": "3.0.6",
@@ -48,6 +49,14 @@
       "url": "https://package.openupm.com",
       "scopes": [
         "com.ultraleap"
+      ]
+    },
+    {
+      "name": "Normal",
+      "url": "https://normcore-registry.normcore.io",
+      "scopes": [
+        "com.normalvr",
+        "io.normcore"
       ]
     }
   ]

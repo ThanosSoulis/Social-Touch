@@ -1654,6 +1654,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 949539046}
     - target: {fileID: 6091436777440832123, guid: 8e0fbeda1179e774da6992760eebb4f1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.98330736
+      objectReference: {fileID: 0}
+    - target: {fileID: 6091436777440832123, guid: 8e0fbeda1179e774da6992760eebb4f1, type: 3}
       propertyPath: m_LocalScale.y
       value: 1
       objectReference: {fileID: 0}
@@ -1732,6 +1736,10 @@ PrefabInstance:
     - target: {fileID: 7850307364774341991, guid: 8e0fbeda1179e774da6992760eebb4f1, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.0016618036
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142502994988969365, guid: 8e0fbeda1179e774da6992760eebb4f1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.98330736
       objectReference: {fileID: 0}
     - target: {fileID: 8142502994988969365, guid: 8e0fbeda1179e774da6992760eebb4f1, type: 3}
       propertyPath: m_LocalScale.y
@@ -1818,6 +1826,10 @@ PrefabInstance:
     - target: {fileID: 166326, guid: b9c7aaf0d314cb847a3b2a20e893f1b6, type: 3}
       propertyPath: m_Name
       value: Service Provider (Desktop)
+      objectReference: {fileID: 0}
+    - target: {fileID: 166326, guid: b9c7aaf0d314cb847a3b2a20e893f1b6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 432918, guid: b9c7aaf0d314cb847a3b2a20e893f1b6, type: 3}
       propertyPath: m_LocalPosition.x

@@ -159,6 +159,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
     Android: com.DefaultCompany.SocialTouch
+    Standalone: com.DefaultCompany.Social-Touch
   buildNumber:
     Standalone: 0
     VisionOS: 0
@@ -483,10 +484,10 @@ PlayerSettings:
   enableInternalProfiler: 0
   logObjCUncaughtExceptions: 1
   enableCrashReportAPI: 0
-  cameraUsageDescription: 
+  cameraUsageDescription: Uses Camera
   locationUsageDescription: 
-  microphoneUsageDescription: 
-  bluetoothUsageDescription: 
+  microphoneUsageDescription: Uses Microphone
+  bluetoothUsageDescription: Uses Bluetooth
   macOSTargetOSVersion: 10.13.0
   switchNMETAOverride: 
   switchNetLibKey: 
@@ -735,8 +736,8 @@ PlayerSettings:
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
   scriptingDefineSymbols:
-    Android: USE_INPUT_SYSTEM_POSE_CONTROL
-    Standalone: USE_INPUT_SYSTEM_POSE_CONTROL
+    Android: USE_INPUT_SYSTEM_POSE_CONTROL;NORMCORE
+    Standalone: USE_INPUT_SYSTEM_POSE_CONTROL;NORMCORE
     Windows Store Apps: USE_INPUT_SYSTEM_POSE_CONTROL
   additionalCompilerArguments: {}
   platformArchitecture: {}
