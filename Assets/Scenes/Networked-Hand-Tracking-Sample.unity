@@ -262,7 +262,7 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 212097280}
-    PlayerPrefab: {fileID: 1578816609911254341}
+    PlayerPrefab: {fileID: 7147245158459454754, guid: a527e95d02fb64512a8bf85003b66a94, type: 3}
     Prefabs:
       NetworkPrefabsLists:
       - {fileID: 11400000, guid: 89e6228a5ed8e4fb5b4e71ff7e343cb7, type: 2}
@@ -1086,11 +1086,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!1 &1578816609911254341 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7147245158459454754, guid: a527e95d02fb64512a8bf85003b66a94, type: 3}
-  m_PrefabInstance: {fileID: 6516171547703993953}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2846421900988051612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3277,7 +3272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3694072521
+  GlobalObjectIdHash: 125634116
   InScenePlacedSourceGlobalObjectIdHash: 3604612814
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -3411,6 +3406,10 @@ PrefabInstance:
     - target: {fileID: 7147245158459454754, guid: a527e95d02fb64512a8bf85003b66a94, type: 3}
       propertyPath: m_Name
       value: Player-Hands-Networked
+      objectReference: {fileID: 0}
+    - target: {fileID: 7147245158459454754, guid: a527e95d02fb64512a8bf85003b66a94, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8514093609444391621, guid: a527e95d02fb64512a8bf85003b66a94, type: 3}
       propertyPath: GlobalObjectIdHash
