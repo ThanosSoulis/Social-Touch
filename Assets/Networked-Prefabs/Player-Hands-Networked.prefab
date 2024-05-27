@@ -3472,7 +3472,7 @@ GameObject:
   - component: {fileID: 6825660675302678229}
   - component: {fileID: 2472225202943760851}
   - component: {fileID: 5791919332041771357}
-  - component: {fileID: 5249238341839648572}
+  - component: {fileID: 4007616128586742344}
   m_Layer: 0
   m_Name: LowPolyHandArm_Right
   m_TagString: Untagged
@@ -4178,7 +4178,7 @@ MonoBehaviour:
   DebugModelRotationAxis: 0
   FineTuning: 0
   DebugOptions: 0
---- !u!114 &5249238341839648572
+--- !u!114 &4007616128586742344
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4190,7 +4190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bcd03e00992e084c8be61565d44b8bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  disableOnAwake: 1
+  disableOnAwake: 0
   FreezeHandState: 0
 --- !u!1 &1389562114029236129
 GameObject:
@@ -9738,7 +9738,7 @@ GameObject:
   - component: {fileID: 9039876660706086099}
   - component: {fileID: 2991695654513674635}
   - component: {fileID: 488823568809590764}
-  - component: {fileID: 2605622380878381215}
+  - component: {fileID: 1230294978691758370}
   m_Layer: 0
   m_Name: LowPolyHandArm_Left
   m_TagString: Untagged
@@ -10449,7 +10449,7 @@ MonoBehaviour:
   DebugModelRotationAxis: 0
   FineTuning: 0
   DebugOptions: 0
---- !u!114 &2605622380878381215
+--- !u!114 &1230294978691758370
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -15222,7 +15222,7 @@ MonoBehaviour:
   SceneMigrationSynchronization: 1
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
+  AutoObjectParentSync: 0
 --- !u!114 &4536153773576306651
 MonoBehaviour:
   m_ObjectHideFlags: 0

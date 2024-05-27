@@ -32,8 +32,8 @@ public class NetworkHands : NetworkBehaviour
         {
             // We own the hands, so we will be sending the data across the network
             leapProvider.OnUpdateFrame += OnUpdateFrame;
-            Destroy(leftModel?.gameObject);
-            Destroy(rightModel?.gameObject);
+            //Destroy(leftModel?.gameObject);
+            //Destroy(rightModel?.gameObject);
         }
         else
         {
