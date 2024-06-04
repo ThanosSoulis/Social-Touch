@@ -105,7 +105,7 @@ namespace Leap.InteractionEngine.Examples
         {
             // If the velocity of the object while grasped is too large, exit workstation mode.
             if (workstationState == WorkstationState.Open
-                && (_intObj.rigidbody.velocity.magnitude > MAX_SPEED_AS_WORKSTATION
+                && (_intObj.rigidbody.linearVelocity.magnitude > MAX_SPEED_AS_WORKSTATION
                 || (_intObj.rigidbody.isKinematic && ((preSolvePos - curPos).magnitude / Time.fixedDeltaTime) > MAX_SPEED_AS_WORKSTATION)))
             {
                 DeactivateWorkstation();

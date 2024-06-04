@@ -65,7 +65,7 @@ namespace Leap.InteractionEngine.Examples
 
                 // (Optional) Remember B's pose and motion to apply to A post-swap.
                 var bPose = new Pose(b.rigidbody.position, b.rigidbody.rotation);
-                var bVel = b.rigidbody.velocity;
+                var bVel = b.rigidbody.linearVelocity;
                 var bAngVel = b.rigidbody.angularVelocity;
 
                 // Match the rigidbody pose of the originally held object before swapping.
@@ -90,7 +90,7 @@ namespace Leap.InteractionEngine.Examples
                 // Move A over to where B was, and for fun, let's give it B's motion as well.
                 a.rigidbody.position = bPose.position;
                 a.rigidbody.rotation = bPose.rotation;
-                a.rigidbody.velocity = bVel;
+                a.rigidbody.linearVelocity = bVel;
                 a.rigidbody.angularVelocity = bAngVel;
             }
 

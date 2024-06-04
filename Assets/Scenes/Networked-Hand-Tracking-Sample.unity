@@ -13,7 +13,7 @@ OcclusionCullingSettings:
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 9
+  serializedVersion: 10
   m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
@@ -38,13 +38,11 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.51974493, g: 0.5729488, b: 0.5887736, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 12
-  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -67,9 +65,6 @@ LightmapSettings:
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
     m_TextureCompression: 1
-    m_FinalGather: 0
-    m_FinalGatherFiltering: 1
-    m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
     m_MixedBakeMode: 2
     m_BakeBackend: 1
@@ -197,6 +192,7 @@ GameObject:
   - component: {fileID: 212097281}
   - component: {fileID: 212097280}
   - component: {fileID: 212097282}
+  - component: {fileID: 212097284}
   - component: {fileID: 212097283}
   m_Layer: 0
   m_Name: NetworkManager
@@ -233,6 +229,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ProtocolType: 0
+  m_UseWebSockets: 0
+  m_UseEncryption: 0
   m_MaxPacketQueueSize: 128
   m_MaxPayloadSize: 6144
   m_HeartbeatTimeoutMS: 500
@@ -262,7 +260,7 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 212097280}
-    PlayerPrefab: {fileID: 1013164034}
+    PlayerPrefab: {fileID: 7147245158459454754, guid: a527e95d02fb64512a8bf85003b66a94, type: 3}
     Prefabs:
       NetworkPrefabsLists:
       - {fileID: 11400000, guid: 89e6228a5ed8e4fb5b4e71ff7e343cb7, type: 2}
@@ -281,6 +279,11 @@ MonoBehaviour:
     LoadSceneTimeOut: 120
     SpawnTimeout: 1
     EnableNetworkLogs: 1
+    NetworkTopology: 0
+    UseCMBService: 0
+    AutoSpawnPlayerPrefabClientSide: 1
+    NetworkMessageMetrics: 1
+    NetworkProfilingMetrics: 1
     OldPrefabList: []
   RunInBackground: 1
   LogLevel: 0
@@ -309,6 +312,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LocalIP: 
+--- !u!114 &212097284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 212097278}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db3ffa082a8a7491f97ae975a4a14363, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &511024711
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -465,9 +480,8 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
   m_Enabled: 1
-  serializedVersion: 10
+  serializedVersion: 11
   m_Type: 1
-  m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   m_Intensity: 1
   m_Range: 10
@@ -517,8 +531,12 @@ Light:
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
+  m_ForceVisible: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+  m_LightUnit: 1
+  m_LuxAtDistance: 1
+  m_EnableSpotReflector: 1
 --- !u!4 &705507995
 Transform:
   m_ObjectHideFlags: 0
@@ -760,11 +778,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 25, y: 0, z: 0}
---- !u!1 &1013164034 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7147245158459454754, guid: a527e95d02fb64512a8bf85003b66a94, type: 3}
-  m_PrefabInstance: {fileID: 6516171547703993953}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1850401349
 GameObject:
   m_ObjectHideFlags: 0
@@ -1548,8 +1561,8 @@ PrefabInstance:
       value: 2057796719
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 4007616128586742344, guid: a527e95d02fb64512a8bf85003b66a94, type: 3}
-    - {fileID: 1230294978691758370, guid: a527e95d02fb64512a8bf85003b66a94, type: 3}
+    - {fileID: 0}
+    - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
