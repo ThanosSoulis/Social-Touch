@@ -74,7 +74,7 @@ public class NetworkHands : NetworkBehaviour
         }
         
         // Find the left hand index and use it if it exists
-        frame.Hands.FindIndex(x => x.IsLeft);
+        ind = frame.Hands.FindIndex(x => x.IsLeft);
         if(ind != -1)
         {
             // The left hand exists, encode the vector hand for it and fill the byte[] with data
