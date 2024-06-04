@@ -87,7 +87,7 @@ public class NetworkHands : NetworkBehaviour
             _rightTracked = false;
         }
 
-        // Send any data we have generated to the server to be disributed across the network
+        // Send any data we have generated to the server to be distributed across the network
         UpdateHandServerRpc(NetworkManager.LocalClientId, _leftTracked, _rightTracked, _leftBytes, _rightBytes);
     }
     // private void UpdateHandRpc(ulong clientId, bool leftTracked, bool rightTracked, byte[] leftHand, byte[] rightHand)
