@@ -3472,7 +3472,7 @@ GameObject:
   - component: {fileID: 6825660675302678229}
   - component: {fileID: 2472225202943760851}
   - component: {fileID: 5791919332041771357}
-  - component: {fileID: 4007616128586742344}
+  - component: {fileID: 4489594529938293133}
   m_Layer: 0
   m_Name: LowPolyHandArm_Right
   m_TagString: Untagged
@@ -4178,7 +4178,7 @@ MonoBehaviour:
   DebugModelRotationAxis: 0
   FineTuning: 0
   DebugOptions: 0
---- !u!114 &4007616128586742344
+--- !u!114 &4489594529938293133
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9738,7 +9738,7 @@ GameObject:
   - component: {fileID: 9039876660706086099}
   - component: {fileID: 2991695654513674635}
   - component: {fileID: 488823568809590764}
-  - component: {fileID: 1230294978691758370}
+  - component: {fileID: 2483563673300255020}
   m_Layer: 0
   m_Name: LowPolyHandArm_Left
   m_TagString: Untagged
@@ -10449,7 +10449,7 @@ MonoBehaviour:
   DebugModelRotationAxis: 0
   FineTuning: 0
   DebugOptions: 0
---- !u!114 &1230294978691758370
+--- !u!114 &2483563673300255020
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -15251,6 +15251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d98c7a35eef244ba9beddcd54bcf90c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAutoInstantiated: 1
   leftModel: {fileID: 488823568809590764}
   rightModel: {fileID: 5791919332041771357}
 --- !u!1 &7165865302664799357
