@@ -115,20 +115,6 @@ public class NetworkHands : NetworkBehaviour
 
     private void LoadHandsData(bool leftTracked, bool rightTracked, byte[] leftHand, byte[] rightHand)
     {
-        if (leftModel != null)
-        {
-            leftModel.gameObject.SetActive(leftTracked);
-
-            if (leftTracked)
-            {
-                // Read the new data into the vector hand and then decode it into a Leap.Hand to be send to the hand model
-                _leftVector.ReadBytes(leftHand);
-                _leftVector.Decode(this._leftHand);
-                leftModel?.SetLeapHand(this._leftHand);
-                leftModel?.UpdateHand();
-            }
-        }
-
         if(rightModel != null)
         {
             rightModel.gameObject.SetActive(rightTracked);
@@ -140,6 +126,20 @@ public class NetworkHands : NetworkBehaviour
                 _rightVector.Decode(this._rightHand);
                 rightModel?.SetLeapHand(this._rightHand);
                 rightModel?.UpdateHand();
+            }
+        }
+        
+        if (leftModel != null)
+        {
+            leftModel.gameObject.SetActive(leftTracked);
+
+            if (leftTracked)
+            {
+                // Read the new data into the vector hand and then decode it into a Leap.Hand to be send to the hand model
+                _leftVector.ReadBytes(leftHand);
+                _leftVector.Decode(this._leftHand);
+                leftModel?.SetLeapHand(this._leftHand);
+                leftModel?.UpdateHand();
             }
         }
     }
