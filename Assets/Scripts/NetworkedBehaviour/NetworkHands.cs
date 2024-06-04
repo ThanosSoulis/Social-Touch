@@ -60,8 +60,21 @@ public class NetworkHands : NetworkBehaviour
 
     private void OnUpdateFrame(Frame frame)
     {
+        int ind = frame.Hands.FindIndex(x => x.IsRight);
+        if(ind != -1)
+        {
+            // The right hand exists, encode the vector hand for it and fill the byte[] with data
+            _rightTracked = true;
+            _rightVector.Encode(frame.Hands[ind]);
+            _rightVector.FillBytes(_rightBytes);
+        }
+        else
+        {
+            _rightTracked = false;
+        }
+        
         // Find the left hand index and use it if it exists
-        int ind = frame.Hands.FindIndex(x => x.IsLeft);
+        frame.Hands.FindIndex(x => x.IsLeft);
         if(ind != -1)
         {
             // The left hand exists, encode the vector hand for it and fill the byte[] with data
@@ -74,32 +87,9 @@ public class NetworkHands : NetworkBehaviour
             _leftTracked = false;
         }
 
-        ind = frame.Hands.FindIndex(x => x.IsRight);
-        if(ind != -1)
-        {
-            // The right hand exists, encode the vector hand for it and fill the byte[] with data
-            _rightTracked = true;
-            _rightVector.Encode(frame.Hands[ind]);
-            _rightVector.FillBytes(_rightBytes);
-        }
-        else
-        {
-            _rightTracked = false;
-        }
-
         // Send any data we have generated to the server to be distributed across the network
         UpdateHandServerRpc(NetworkManager.LocalClientId, _leftTracked, _rightTracked, _leftBytes, _rightBytes);
     }
-    // private void UpdateHandRpc(ulong clientId, bool leftTracked, bool rightTracked, byte[] leftHand, byte[] rightHand)
-    // {
-    //     if (!IsServer) return;
-    //
-    //     // As the server, we should directly Load the data we were given
-    //     LoadHandsData(leftTracked, rightTracked, leftHand, rightHand);
-    //
-    //     // Send the data on to all clients for use on their hands
-    //     UpdateHandClientRpc(clientId, leftTracked, rightTracked, leftHand, rightHand);
-    // }
     
     [Rpc(SendTo.Server)]
     private void UpdateHandServerRpc(ulong clientId, bool leftTracked, bool rightTracked, byte[] leftHand, byte[] rightHand)
