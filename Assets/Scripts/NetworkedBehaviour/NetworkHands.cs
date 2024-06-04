@@ -8,32 +8,37 @@ using Unity.Netcode;
 
 public class NetworkHands : NetworkBehaviour
 {
-    [SerializeField]
-    private HandModelBase leftModel = null, rightModel = null;
+    [SerializeField] private bool isAutoInstantiated = true;
+    [SerializeField] private HandModelBase leftModel = null, rightModel = null;
+    
+    private LeapProvider _leapProvider;
 
-    private LeapProvider leapProvider;
+    private VectorHand _leftVector = new VectorHand(), _rightVector = new VectorHand();
+    private Hand _leftHand = new Hand(), _rightHand = new Hand();
 
-    private VectorHand leftVector = new VectorHand(), rightVector = new VectorHand();
-    private Hand leftHand = new Hand(), rightHand = new Hand();
+    private byte[] _leftBytes = new byte[VectorHand.NUM_BYTES], _rightBytes = new byte[VectorHand.NUM_BYTES];
 
-    private byte[] leftBytes = new byte[VectorHand.NUM_BYTES], rightBytes = new byte[VectorHand.NUM_BYTES];
-
-    private bool leftTracked, rightTracked;
+    private bool _leftTracked, _rightTracked;
 
     private void Awake()
     {
         // Find the most suitable LeapProvider in the scene automatically
-        leapProvider = Hands.Provider;
+        _leapProvider = Hands.Provider;
     }
-
+    
     public override void OnNetworkSpawn()
     {
         if (IsOwner)
         {
             // We own the hands, so we will be sending the data across the network
-            leapProvider.OnUpdateFrame += OnUpdateFrame;
-            //Destroy(leftModel?.gameObject);
-            //Destroy(rightModel?.gameObject);
+            _leapProvider.OnUpdateFrame += OnUpdateFrame;
+            
+            //Destroy model if it is not instantiated by the NetworkManager
+            if (!isAutoInstantiated)
+            {
+                Destroy(leftModel?.gameObject);
+                Destroy(rightModel?.gameObject);   
+            }
         }
         else
         {
@@ -49,7 +54,7 @@ public class NetworkHands : NetworkBehaviour
         if (IsOwner)
         {
             // We no longer need this event as we have disconnected from the network
-            leapProvider.OnUpdateFrame -= OnUpdateFrame;
+            _leapProvider.OnUpdateFrame -= OnUpdateFrame;
         }
     }
 
@@ -60,30 +65,30 @@ public class NetworkHands : NetworkBehaviour
         if(ind != -1)
         {
             // The left hand exists, encode the vector hand for it and fill the byte[] with data
-            leftTracked = true;
-            leftVector.Encode(frame.Hands[ind]);
-            leftVector.FillBytes(leftBytes);
+            _leftTracked = true;
+            _leftVector.Encode(frame.Hands[ind]);
+            _leftVector.FillBytes(_leftBytes);
         }
         else
         {
-            leftTracked = false;
+            _leftTracked = false;
         }
 
         ind = frame.Hands.FindIndex(x => !x.IsLeft);
         if(ind != -1)
         {
             // The right hand exists, encode the vector hand for it and fill the byte[] with data
-            rightTracked = true;
-            rightVector.Encode(frame.Hands[ind]);
-            rightVector.FillBytes(rightBytes);
+            _rightTracked = true;
+            _rightVector.Encode(frame.Hands[ind]);
+            _rightVector.FillBytes(_rightBytes);
         }
         else
         {
-            rightTracked = false;
+            _rightTracked = false;
         }
 
         // Send any data we have generated to the server to be disributed across the network
-        UpdateHandServerRpc(NetworkManager.LocalClientId, leftTracked, rightTracked, leftBytes, rightBytes);
+        UpdateHandServerRpc(NetworkManager.LocalClientId, _leftTracked, _rightTracked, _leftBytes, _rightBytes);
     }
 
     [ServerRpc]
@@ -117,9 +122,9 @@ public class NetworkHands : NetworkBehaviour
             if (leftTracked)
             {
                 // Read the new data into the vector hand and then decode it into a Leap.Hand to be send to the hand model
-                leftVector.ReadBytes(leftHand);
-                leftVector.Decode(this.leftHand);
-                leftModel?.SetLeapHand(this.leftHand);
+                _leftVector.ReadBytes(leftHand);
+                _leftVector.Decode(this._leftHand);
+                leftModel?.SetLeapHand(this._leftHand);
                 leftModel?.UpdateHand();
             }
         }
@@ -131,9 +136,9 @@ public class NetworkHands : NetworkBehaviour
             if (rightTracked)
             {
                 // Read the new data into the vector hand and then decode it into a Leap.Hand to be send to the hand model
-                rightVector.ReadBytes(rightHand);
-                rightVector.Decode(this.rightHand);
-                rightModel?.SetLeapHand(this.rightHand);
+                _rightVector.ReadBytes(rightHand);
+                _rightVector.Decode(this._rightHand);
+                rightModel?.SetLeapHand(this._rightHand);
                 rightModel?.UpdateHand();
             }
         }

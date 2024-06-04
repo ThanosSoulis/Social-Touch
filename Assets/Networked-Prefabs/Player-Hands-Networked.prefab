@@ -10461,7 +10461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bcd03e00992e084c8be61565d44b8bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  disableOnAwake: 1
+  disableOnAwake: 0
   FreezeHandState: 0
 --- !u!1 &4508635741643210196
 GameObject:
