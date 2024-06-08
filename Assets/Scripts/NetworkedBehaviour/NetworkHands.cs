@@ -43,7 +43,7 @@ public class NetworkHands : NetworkBehaviour
         else
         {
             // We are going to be sent hand data for these hands.
-            // We should control the hands directly, not from a LeapProvider
+            // We should control the hands through network, not from a LeapProvider
             leftModel.leapProvider = null;
             rightModel.leapProvider = null;
         }
