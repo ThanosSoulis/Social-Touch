@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e978211e178b22a4c8ed7f19da669710, type: 3}
+  m_Name: Force Field
+  m_EditorClassIdentifier: 
+  position: {x: 0, y: 0.2, z: -0.08}
+  rotation: {x: -0, y: 0, z: 0}
+  scale: {x: 1, y: 1, z: 1}
+  frequency: 40
+  speedTravel: 12
+  frequencyRule: 1
+  length: 0.15
+  trackedObjectPosition: {x: -Infinity, y: -Infinity, z: -Infinity}
+  beforeThreshold: 0.15
+  afterThreshold: 0.1
