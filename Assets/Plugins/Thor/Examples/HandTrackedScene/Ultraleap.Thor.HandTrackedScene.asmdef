@@ -1,0 +1,26 @@
+{
+    "name": "Ultraleap.Thor.HandTrackedScene",
+    "rootNamespace": "",
+    "references": [
+        "GUID:616014e293cdc0f41a88c919192b48ef",
+        "GUID:cec9848704c49724192ff47f9b3e9156",
+        "GUID:2ee0542102ac1084e8d9a910885c1e81"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [
+        "USE_ULTRALEAP_TRACKING"
+    ],
+    "versionDefines": [
+        {
+            "name": "com.ultraleap.tracking",
+            "expression": "6.0",
+            "define": "USE_ULTRALEAP_TRACKING"
+        }
+    ],
+    "noEngineReferences": false
+}
