@@ -5,11 +5,21 @@ using Leap.Unity.Encoding;
 
 using UnityEngine;
 using Unity.Netcode;
+using UnityEngine.Serialization;
 
 public class NetworkHands : NetworkBehaviour
 {
     [SerializeField] private bool isAutoInstantiated = true;
-    [SerializeField] private HandModelBase leftModel = null, rightModel = null;
+
+    [Header("Hand Models Renderer")]
+    [SerializeField] private HandModelBase leftModelRenderer;
+    [SerializeField] private HandModelBase rightModelRenderer;
+    
+    [Header("Hand Models Interactable")]
+    [SerializeField] private HandModelBase leftModelInteractable;
+    [SerializeField] private HandModelBase rightModelInteractable;
+    
+    private HandModelBase leftModel = null, rightModel = null;
     
     private LeapProvider _leapProvider;
 
@@ -30,6 +40,13 @@ public class NetworkHands : NetworkBehaviour
     {
         if (IsOwner)
         {
+            // As the owner, we should be using the Renderer hands
+            leftModel = leftModelRenderer;
+            rightModel = rightModelRenderer;
+            // Disable the interactable hands
+            leftModelInteractable.gameObject.SetActive(false);
+            rightModelInteractable.gameObject.SetActive(false);
+            
             // We own the hands, so we will be sending the data across the network
             _leapProvider.OnUpdateFrame += OnUpdateFrame;
             
@@ -42,6 +59,13 @@ public class NetworkHands : NetworkBehaviour
         }
         else
         {
+            // We are not the owners, we should be using the Interactable hands
+            leftModel = leftModelInteractable;
+            rightModel = rightModelInteractable;
+            // Disable the renderer hands
+            leftModelRenderer.gameObject.SetActive(false);
+            rightModelRenderer.gameObject.SetActive(false);
+            
             // We are going to be sent hand data for these hands.
             // We should control the hands through network, not from a LeapProvider
             leftModel.leapProvider = null;
