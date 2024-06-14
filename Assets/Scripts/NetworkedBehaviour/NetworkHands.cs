@@ -1,23 +1,21 @@
 // Credits to https://docs.ultraleap.com/xr-and-tabletop/xr/unity/plugin/features/networking-hands.html
+
+using System.Linq;
 using Leap;
 using Leap.Unity;
 using Leap.Unity.Encoding;
-
 using UnityEngine;
 using Unity.Netcode;
-using UnityEngine.Serialization;
 
 public class NetworkHands : NetworkBehaviour
 {
     [SerializeField] private bool isAutoInstantiated = true;
 
     [Header("Hand Models Renderer")]
-    [SerializeField] private HandModelBase leftModelRenderer;
-    [SerializeField] private HandModelBase rightModelRenderer;
-    
+    [SerializeField] private GameObject handsRendererRoot;
+
     [Header("Hand Models Interactable")]
-    [SerializeField] private HandModelBase leftModelInteractable;
-    [SerializeField] private HandModelBase rightModelInteractable;
+    [SerializeField] private GameObject handsInteractableRoot;
     
     private HandModelBase leftModel = null, rightModel = null;
     
@@ -36,16 +34,30 @@ public class NetworkHands : NetworkBehaviour
         _leapProvider = Hands.Provider;
     }
     
+    private void AssignRendererHands()
+    {
+        handsInteractableRoot.SetActive(false);
+        
+        var handModels = handsRendererRoot.GetComponentsInChildren<HandModelBase>();
+        leftModel = handModels.First(h => h.Handedness == Chirality.Left);
+        rightModel = handModels.First(h => h.Handedness == Chirality.Right);
+    }
+    
+    private void AssignInteractableHands()
+    {
+        handsRendererRoot.SetActive(false);
+        
+        var handModels = handsInteractableRoot.GetComponentsInChildren<HandModelBase>();
+        leftModel = handModels.First(h => h.Handedness == Chirality.Left);
+        rightModel = handModels.First(h => h.Handedness == Chirality.Right);
+    }
+    
     public override void OnNetworkSpawn()
     {
         if (IsOwner)
         {
             // As the owner, we should be using the Renderer hands
-            leftModel = leftModelRenderer;
-            rightModel = rightModelRenderer;
-            // Disable the interactable hands
-            leftModelInteractable.gameObject.SetActive(false);
-            rightModelInteractable.gameObject.SetActive(false);
+            AssignRendererHands();
             
             // We own the hands, so we will be sending the data across the network
             _leapProvider.OnUpdateFrame += OnUpdateFrame;
@@ -60,11 +72,7 @@ public class NetworkHands : NetworkBehaviour
         else
         {
             // We are not the owners, we should be using the Interactable hands
-            leftModel = leftModelInteractable;
-            rightModel = rightModelInteractable;
-            // Disable the renderer hands
-            leftModelRenderer.gameObject.SetActive(false);
-            rightModelRenderer.gameObject.SetActive(false);
+            AssignInteractableHands();
             
             // We are going to be sent hand data for these hands.
             // We should control the hands through network, not from a LeapProvider
