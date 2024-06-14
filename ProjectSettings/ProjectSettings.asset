@@ -168,7 +168,7 @@ PlayerSettings:
   androidMinAspectRatio: 1
   applicationIdentifier:
     Android: com.DefaultCompany.SocialTouch
-    Standalone: com.DefaultCompany.Social-Touch
+    Standalone: com.thanos-soulis.Social-Touch
   buildNumber:
     Standalone: 0
     VisionOS: 0

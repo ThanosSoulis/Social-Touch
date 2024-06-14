@@ -1,5 +1,28 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9003278655016167390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c465bd23c9c4fb442ae89117552a5f3f, type: 3}
+  m_Name: HandTrackingFeature Android
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Ultraleap Hand Tracking
+  version: 1.0.0
+  featureIdInternal: com.ultraleap.tracking.openxr.feature.handtracking
+  openxrExtensionStrings: XR_EXT_hand_tracking XR_ULTRALEAP_hand_tracking_forearm
+    XR_ULTRALEAP_hand_tracking_hints
+  company: Ultraleap
+  priority: 0
+  required: 0
+  metaPermissions: 1
+  metaHighFrequency: 1
 --- !u!114 &-8874947000133699868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -224,7 +247,7 @@ MonoBehaviour:
   - {fileID: -1064280427015834128}
   - {fileID: -7778985966983704897}
   - {fileID: -4796355971853895585}
-  - {fileID: -5054564580924394395}
+  - {fileID: 639405906031691112}
   - {fileID: -2202159530931713145}
   - {fileID: 5003659825488320129}
   - {fileID: 7105973384345785882}
@@ -397,6 +420,29 @@ MonoBehaviour:
   - {fileID: -4239539630088312593}
   - {fileID: 8038226826876644284}
   - {fileID: -3378143989627472106}
+--- !u!114 &639405906031691112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c465bd23c9c4fb442ae89117552a5f3f, type: 3}
+  m_Name: HandTrackingFeature Standalone
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Ultraleap Hand Tracking
+  version: 1.0.0
+  featureIdInternal: com.ultraleap.tracking.openxr.feature.handtracking
+  openxrExtensionStrings: XR_EXT_hand_tracking XR_ULTRALEAP_hand_tracking_forearm
+    XR_ULTRALEAP_hand_tracking_hints
+  company: Ultraleap
+  priority: 0
+  required: 0
+  metaPermissions: 1
+  metaHighFrequency: 1
 --- !u!114 &816651566994943631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -762,7 +808,7 @@ MonoBehaviour:
   - {fileID: -4599838984114711863}
   - {fileID: 5818697017415408875}
   - {fileID: 5816379243521624957}
-  - {fileID: 3309528099755380046}
+  - {fileID: -9003278655016167390}
   - {fileID: 4874815682847694184}
   - {fileID: 816651566994943631}
   - {fileID: 4800456345768815800}
