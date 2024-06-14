@@ -36,20 +36,22 @@ public class NetworkHands : NetworkBehaviour
     
     private void AssignRendererHands()
     {
-        handsInteractableRoot.SetActive(false);
-        
-        var handModels = handsRendererRoot.GetComponentsInChildren<HandModelBase>();
+        var handModels = handsRendererRoot.GetComponentsInChildren<HandModelBase>(true);
         leftModel = handModels.First(h => h.Handedness == Chirality.Left);
         rightModel = handModels.First(h => h.Handedness == Chirality.Right);
+        
+        // Disable interactable hands
+        handsInteractableRoot.SetActive(false);
     }
     
     private void AssignInteractableHands()
     {
-        handsRendererRoot.SetActive(false);
-        
-        var handModels = handsInteractableRoot.GetComponentsInChildren<HandModelBase>();
+        var handModels = handsInteractableRoot.GetComponentsInChildren<HandModelBase>(true);
         leftModel = handModels.First(h => h.Handedness == Chirality.Left);
         rightModel = handModels.First(h => h.Handedness == Chirality.Right);
+
+        // Disable renderer hands
+        handsRendererRoot.SetActive(false);
     }
     
     public override void OnNetworkSpawn()
