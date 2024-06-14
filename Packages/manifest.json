@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "com.ultraleap.tracking": "6.15.0",
+    "com.ultraleap.tracking.preview": "6.15.0",
     "com.unity.collab-proxy": "2.3.1",
     "com.unity.feature.development": "1.0.2",
     "com.unity.multiplayer.samples.coop": "https://github.com/Unity-Technologies/com.unity.multiplayer.samples.coop.git?path=/Packages/com.unity.multiplayer.samples.coop#main",
