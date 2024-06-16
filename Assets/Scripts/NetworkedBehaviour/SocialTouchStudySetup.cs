@@ -2,7 +2,7 @@ using Unity.Netcode;
 using UnityEngine;
 
 [RequireComponent(typeof(NetworkManager))]
-public class SocialTouchStudySetup : NetworkBehaviour
+public class SocialTouchStudySetup : MonoBehaviour
 {
     public Transform userTransformA, userTransformB;
     public GameObject userNetworkedPrefab;
