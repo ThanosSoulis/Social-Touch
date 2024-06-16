@@ -1,6 +1,7 @@
 using Unity.Netcode;
 using UnityEngine;
 
+[RequireComponent(typeof(NetworkManager))]
 public class SocialTouchStudySetup : MonoBehaviour
 {
     public Transform userTransformA, userTransformB;
@@ -32,16 +33,19 @@ public class SocialTouchStudySetup : MonoBehaviour
                 ClientDisconnectedAction();
                 break;
             default:
-                Debug.Log("Unhandled Connection Event");
+                Debug.Log("[Social Touch] Unhandled Connection Event");
                 break;
         }
     }
 
     private void ClientConnectedHandler(NetworkManager networkManager, ConnectionEventData connectionData)
     {
-        Debug.Log("Client Connected");
-                
-        if (networkManager.IsClient) {}
+        Debug.Log("[Social Touch] Client Connected");
+
+        if (networkManager.IsClient)
+        {
+            Debug.Log("[Social Touch] No Spawning for Client");
+        }
 
         if (networkManager.IsServer || networkManager.IsHost)
             ClientConnectedServerHandler(connectionData.ClientId);
@@ -56,11 +60,13 @@ public class SocialTouchStudySetup : MonoBehaviour
         var instance = Instantiate(userNetworkedPrefab, spawnTransform.position, spawnTransform.rotation);
         var instanceNetworkObject = instance.GetComponent<NetworkObject>();
         instanceNetworkObject.SpawnAsPlayerObject(clientId,true);
+        
+        Debug.Log($"[Social Touch] Spawned User Networked Prefab for ClientID=|{clientId}|");
     }
     
     private void ClientDisconnectedAction()
     {
-        Debug.Log("Client Disconnected");
+        Debug.Log("[Social Touch] Client Disconnected");
     }
 
 }
