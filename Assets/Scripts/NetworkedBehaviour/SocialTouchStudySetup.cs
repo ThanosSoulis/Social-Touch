@@ -2,7 +2,7 @@ using Unity.Netcode;
 using UnityEngine;
 
 [RequireComponent(typeof(NetworkManager))]
-public class SocialTouchStudySetup : MonoBehaviour
+public class SocialTouchStudySetup : NetworkBehaviour
 {
     public Transform userTransformA, userTransformB;
     public GameObject userNetworkedPrefab;
@@ -15,11 +15,15 @@ public class SocialTouchStudySetup : MonoBehaviour
     public void Start()
     {   
         _networkManager = NetworkManager.Singleton;
-        _networkManager.OnConnectionEvent += ConnectionEventAction;
+        // _networkManager.OnConnectionEvent += ConnectionEventAction;
+        _networkManager.OnClientConnectedCallback += ClientConnectedServerHandler;
+        _networkManager.OnClientDisconnectCallback += ClientDisconnectedServerHandler;
     }
     public void Destroy()
     {
-        _networkManager.OnConnectionEvent -= ConnectionEventAction;
+        // _networkManager.OnConnectionEvent -= ConnectionEventAction;
+        _networkManager.OnClientConnectedCallback -= ClientConnectedServerHandler;
+        _networkManager.OnClientDisconnectCallback -= ClientDisconnectedServerHandler;
     }
     
     private void ConnectionEventAction(NetworkManager networkManager, ConnectionEventData connectionData)
@@ -30,7 +34,7 @@ public class SocialTouchStudySetup : MonoBehaviour
                 ClientConnectedHandler(networkManager, connectionData);
                 break;
             case ConnectionEvent.ClientDisconnected:
-                ClientDisconnectedAction();
+                ClientDisconnectedHandler(networkManager, connectionData);
                 break;
             default:
                 Debug.Log("[Social Touch] Unhandled Connection Event");
@@ -64,9 +68,14 @@ public class SocialTouchStudySetup : MonoBehaviour
         Debug.Log($"[Social Touch] Spawned User Networked Prefab for ClientID=|{clientId}|");
     }
     
-    private void ClientDisconnectedAction()
+    private void ClientDisconnectedHandler(NetworkManager networkManager, ConnectionEventData connectionData)
     {
-        Debug.Log("[Social Touch] Client Disconnected");
+        ClientDisconnectedServerHandler(connectionData.ClientId);
+    }
+
+    private void ClientDisconnectedServerHandler(ulong clientId)
+    {
+        Debug.Log($"[Social Touch] Client {clientId} Disconnected");
     }
 
 }
