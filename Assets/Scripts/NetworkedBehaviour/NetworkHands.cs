@@ -30,8 +30,8 @@ public class NetworkHands : NetworkBehaviour
 
     private void Awake()
     {
-        // Find the most suitable LeapProvider in the scene automatically
-        _leapProvider = Hands.Provider;
+        // Find the LeapProvider as a child member
+        _leapProvider = GetComponentInChildren<LeapProvider>();
     }
     
     private void AssignRendererHands()
@@ -73,6 +73,9 @@ public class NetworkHands : NetworkBehaviour
         }
         else
         {
+            // Remove access to the LeapProvider as the spawned object is not our concern
+            _leapProvider = null;
+            
             // We are not the owners, we should be using the Interactable hands
             AssignInteractableHands();
             
