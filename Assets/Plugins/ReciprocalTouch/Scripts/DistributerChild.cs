@@ -4,6 +4,13 @@ public class DistributerChild : MonoBehaviour
 {
     public int SphereID;
     public bool Disable;
+    
+    private MammothRenderer _mammothRenderer;
+    void Start()
+    {
+        _mammothRenderer = GetComponentInParent<MammothRenderer>();
+    }
+    
     void OnTriggerEnter(Collider other)
     {
         if (Disable == true) {
