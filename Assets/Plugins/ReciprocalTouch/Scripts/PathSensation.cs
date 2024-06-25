@@ -3,9 +3,11 @@ using System;
 using Ultraleap.Haptics;
 using SVector3 = System.Numerics.Vector3;
 using System.Collections.Generic;
+using Unity.Netcode;
 
-public class PathSensation : MonoBehaviour
+public class PathSensation : NetworkBehaviour
 {
+    public bool IsPersistent;
     public string UHDeviceID = "USX:000005F5";
     public bool DebugOn;
 
@@ -44,26 +46,51 @@ public class PathSensation : MonoBehaviour
     float y;
     float z;
 
+    private IDevice device;
     SVector3 _p = new SVector3();
 
-    void Start()
+    protected override void OnNetworkPostSpawn()
+    {
+        base.OnNetworkPostSpawn();
+
+        if (!IsOwner)
+            return;
+        
+        ConnectToEmitter();
+
+        if (IsPersistent == true)
+        {
+            DontDestroyOnLoad(this.gameObject);
+        }
+    }
+
+    private void ConnectToEmitter()
     {
         DynamicIntensity = Intensity;
 
         using Library lib = new Library();
         lib.Connect();
-        using IDevice device = lib.FindDevice(UHDeviceID);
+        device = lib.FindDevice(UHDeviceID);
         _emitter = new StreamingEmitter(lib);
-        _emitter.Devices.Add(device);
+        //Debug.Log(device.HasModificationClaim);
+        if (device.HasModificationClaim == true) {
+            Debug.Log(_emitter.Devices.Count);
+            //Debug.Log(modifiableDevice.HasModificationClaim);
+            //_emitter.Devices.AddAndTakeOwnership(ref modifiableDevice);
+            
+        }
+        else {
+            _emitter.Devices.Add(device);
+
+        }
 
         _transform = device.GetKitTransform();
 
         _emitter.SetControlPointCount(1, AdjustRate.None);
         _emitter.EmissionCallback = Callback;
 
-        _emitter.Start();      
+        _emitter.Start();    
         Debug.Log("Start");
-
     }
 
     // This callback is called every time the device is ready to accept new control point information

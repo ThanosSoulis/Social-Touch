@@ -8,7 +8,9 @@ public class MammothRenderer : MonoBehaviour
 {
     private PathSensation _pathSensation;
     //public UpdateMeshCollider UpdateMeshCollider;
-    
+
+    public MammothRenderer ShareIntensityFromRenderer;
+
     public Transform ServiceProvider;
     private Vector3 UltraLeapAlignment = new Vector3(0f, 0.1210f, 0f);
 
@@ -38,6 +40,7 @@ public class MammothRenderer : MonoBehaviour
 
     private List<Transform> _contacts = new List<Transform>();
     private List<float> _contactIntensities = new List<float>();
+    public float Intensity;
 
     private Vector3[] _bufferPoints;
     private int[] _bufferIds;
@@ -96,8 +99,6 @@ public class MammothRenderer : MonoBehaviour
         }
     }
 
-    float time;
-
     private void ShortestPath()
     {
         // Smoothing: remove points within MinSmoothingSeparation from each other
@@ -124,12 +125,16 @@ public class MammothRenderer : MonoBehaviour
         // Get the number ofinterpolated points to use per edge
         _bufferEdgeIncrements = MathT.GetEdgeIncrements(_bufferEdgeIncrements, _bufferPoints, _bufferPointsCount, interpolationSeparation);
 
-        float intensity = _contactIntensities.Average();
+        if (ShareIntensityFromRenderer != null) {
+            Intensity = ShareIntensityFromRenderer.Intensity;
+        } else {
+            Intensity = _contactIntensities.Average();
+        }
 
         // Send to UltraHaptics
         if (DisableHaptics == false)
         {
-            _pathSensation.SetPath(_bufferPoints, _bufferPointsCount, _bufferEdgeIncrements, interpolationSeparation, intensity);
+            _pathSensation.SetPath(_bufferPoints, _bufferPointsCount, _bufferEdgeIncrements, interpolationSeparation, Intensity);
         }
     }
 
@@ -183,14 +188,17 @@ public class MammothRenderer : MonoBehaviour
     public void RemoveContactPoint(Transform childTransform)
     {
         int idx = _contacts.IndexOf(childTransform);
-        _contactIntensities.RemoveAt(idx);
-        _contacts.RemoveAt(idx);
+        if (idx >= 0) {
+            _contactIntensities.RemoveAt(idx);
+            _contacts.RemoveAt(idx);
+        }
 
     }
 
     public void Disconnect()
     {
         _contacts.Clear();
+        _contactIntensities.Clear();
     }
 
     void OnDrawGizmosSelected()
