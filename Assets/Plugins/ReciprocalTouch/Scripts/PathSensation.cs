@@ -7,8 +7,13 @@ using Unity.Netcode;
 
 public class PathSensation : NetworkBehaviour
 {
+    [Tooltip("Allows the attached GameObject to persist between scenes")]
     public bool IsPersistent;
-    public string UHDeviceID = "USX:000005F5";
+    
+    [Tooltip("Available UltraHaptics device IDs")]
+    public string[] UHDeviceIDs = { "USX:000005F5", "USX:00000018" };
+    
+    [Tooltip("Print the point position with the Manual Alignment applied")]
     public bool DebugOn;
 
     public float ManualAlignmentX;
@@ -56,47 +61,59 @@ public class PathSensation : NetworkBehaviour
         if (!IsOwner)
             return;
         
-        ConnectToEmitter();
-
-        if (IsPersistent == true)
-        {
+        if (IsPersistent)
             DontDestroyOnLoad(this.gameObject);
-        }
+        
+        ConnectToEmitter();
     }
 
     private void ConnectToEmitter()
     {
         DynamicIntensity = Intensity;
 
-        using Library lib = new Library();
+        Library lib = new Library();
         lib.Connect();
-        device = lib.FindDevice(UHDeviceID);
         _emitter = new StreamingEmitter(lib);
-        //Debug.Log(device.HasModificationClaim);
-        if (device.HasModificationClaim == true) {
-            Debug.Log(_emitter.Devices.Count);
+        
+        // Find a connected UltraHaptics device
+        device = lib.FindDevice();
+        if (device == null)
+        {
+            Debug.LogError("Trying cached UHDeviceIDs");
+            foreach (var UHDeviceID in UHDeviceIDs)
+                device = lib.FindDevice(UHDeviceID);
+        }
+        if(device == null)
+        {
+            Debug.LogError("No UltraHaptics device found");
+            return;
+        }
+        
+        //Check if the device is available
+        if (device.HasModificationClaim) {
+            Debug.LogError("The UltraHaptics device is already claimed");
+            return;
+            // Debug.Log(_emitter.Devices.Count);
             //Debug.Log(modifiableDevice.HasModificationClaim);
             //_emitter.Devices.AddAndTakeOwnership(ref modifiableDevice);
-            
         }
-        else {
-            _emitter.Devices.Add(device);
-
-        }
-
+        
+        //Add the device to the StreamingEmitter
+        _emitter.Devices.Add(device);
+        
+        //Cache the tracking-to-haptics transform
         _transform = device.GetKitTransform();
 
         _emitter.SetControlPointCount(1, AdjustRate.None);
         _emitter.EmissionCallback = Callback;
 
         _emitter.Start();    
-        Debug.Log("Start");
+        Debug.Log("UltraHaptics Emitter Start");
     }
 
     // This callback is called every time the device is ready to accept new control point information
     private void Callback(StreamingEmitter emitter, StreamingEmitter.Interval interval, DateTimeOffset submissionDeadline)
     {
-        //Debug.Log("Callback");
         try
         {
             if (_newPathAvailable == true)
