@@ -58,7 +58,7 @@ public class PathSensation : NetworkBehaviour
     {
         base.OnNetworkPostSpawn();
 
-        if (!IsOwner)
+        if (!IsOwner || !IsLocalPlayer)
             return;
         
         if (IsPersistent)
